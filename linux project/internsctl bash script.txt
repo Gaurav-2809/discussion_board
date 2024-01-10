@@ -1,0 +1,95 @@
+#!/bin/bash
+
+# internsctl - Custom Linux command for intern operations
+
+VERSION="v0.3.0"
+
+show_help() {
+    echo "Usage: internsctl [options]"
+    echo "Options:"
+    echo "  cpu getinfo              Get CPU information (similar to 'lscpu' command)"
+    echo "  memory getinfo           Get memory information (similar to 'free' command)"
+    echo "  user create <username>   Create a new user with login access and home directory"
+    echo "  user list                List all regular users"
+    echo "  user list --sudo-only    List users with sudo permissions"
+    echo "  --help                   Show this help message"
+    echo "  --version                Show the version of internsctl"
+}
+
+create_user() {
+    if [ -z "$2" ]; then
+        echo "Error: Missing username. Usage: internsctl user create <username>"
+        exit 1
+    fi
+
+    username=$2
+    sudo useradd -m -s /bin/bash $username
+    echo "User '$username' created successfully."
+}
+
+get_cpu_info() {
+    lscpu
+}
+
+get_memory_info() {
+    free -h
+}
+
+list_users() {
+    if [ "$2" == "--sudo-only" ]; then
+        echo "Users with sudo permissions:"
+        getent group sudo | cut -d: -f4 | tr ',' '\n'
+    else
+        echo "All regular users:"
+        getent passwd | cut -d: -f1
+    fi
+}
+
+case "$1" in
+    cpu)
+        case "$2" in
+            getinfo)
+                get_cpu_info
+                ;;
+            *)
+                echo "Error: Unknown cpu subcommand. Use 'internsctl --help' for usage information."
+                exit 1
+                ;;
+        esac
+        ;;
+    memory)
+        case "$2" in
+            getinfo)
+                get_memory_info
+                ;;
+            *)
+                echo "Error: Unknown memory subcommand. Use 'internsctl --help' for usage information."
+                exit 1
+                ;;
+        esac
+        ;;
+    user)
+        case "$2" in
+            create)
+                create_user "$@"
+                ;;
+            list)
+                list_users "$@"
+                ;;
+            *)
+                echo "Error: Unknown user subcommand. Use 'internsctl --help' for usage information."
+                exit 1
+                ;;
+        esac
+        ;;
+    --help)
+        show_help
+        ;;
+    --version)
+        echo "internsctl version $VERSION"
+        ;;
+    *)
+        echo "Error: Unknown option. Use 'internsctl --help' for usage information."
+        exit 1
+        ;;
+esac

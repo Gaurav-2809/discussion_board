@@ -1,0 +1,26 @@
+.TH INTERNSCTL 1 "January 2024" "v0.1.0" "internsctl manual"
+
+.SH NAME
+internsctl \- Custom Linux command for intern operations
+
+.SH SYNOPSIS
+.B internsctl
+[\-\-help | \-\-version]
+
+.SH DESCRIPTION
+This manual page documents the internsctl command.
+
+.SH OPTIONS
+.TP
+.B \-\-help
+Show help message and usage information.
+
+.TP
+.B \-\-version
+Show the version of internsctl.
+
+.SH AUTHOR
+Written by Gaurav Gupta 20BCS3644.
+
+.SH SEE ALSO
+.BR man (1)

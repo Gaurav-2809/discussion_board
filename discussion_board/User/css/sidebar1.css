@@ -1,0 +1,59 @@
+body{
+	background-color: #ebe7e7;
+	font-family: poppins, sans-serif;
+}
+.sidebr{
+	background-color: #363535;
+	height: 45.5rem;
+	width: 17rem;
+	position: fixed;
+	transition:all 0.7s ease;
+	color: #8d8d8d;
+	z-index: 1;	
+}
+.logo2{
+	height: 4.2rem;
+	background-color: #363535;
+	color: white;
+}
+.list_cont{
+	margin-top: 3rem;
+}
+.list_cont ul li a{
+	color: grey;
+}
+#iconc,#icon{
+	display: none;
+}
+.online{
+	height: 50rem;	
+	text-align: center;
+}
+.logo{
+	font-size: 1.5rem;
+}
+header{
+	position: fixed;
+	z-index: 1;
+	width: 100%;
+	right: 0;
+	left: 0;
+	background-color: white;
+}
+@media (max-width: 1000px){
+	#icon{
+		display: block;
+	}
+	.sidebr{
+		left:-275px;
+	}
+}
+@media (max-width: 800px){
+	#icon{
+		display: block;
+	}
+	.sidebr{
+		height: 50rem;
+		left:-275px;
+	}
+}
